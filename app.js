@@ -1,7 +1,7 @@
 // Elements du DOM
-const divvies = document.querySelector(".vies");
+const divVies = document.querySelector(".vies");
 const message = document.getElementById("message");
-const formulaire = document.getElementById("inmputBox");
+const formulaire = document.getElementById("inputBox");
 const input = document.getElementById("number");
 const essayerBtn = document.getElementById("essayerBtn");
 const rejouerBtn = document.getElementById("rejouerBtn");
@@ -20,15 +20,14 @@ const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
 // PLAY :
 const play = () => {
     // nombre aléatoire
-    // math.random => generer un nombre aléatoire entre 0 et 1 (1 exclu)
+    // Math.random => generer un nombre aléatoire entre 0 et 1 (1 exclu)
     // Math.floor => renvoi le plus grand entier inférieur ou égal au nombre
-    const randomNumber = Math.floor(math.random() * 101);
+    const randomNumber = Math.floor(Math.random() * 101);
     const totalVies = 8;
     let vies = totalVies;
     console.log(randomNumber);
-
 // actualisation à chaque essai- Toute la logique
-    formulaire.addEventListener('submit', (e) => {
+    formulaire.addEventListener("submit", (e) => {
         e.preventDefault(); //preventDefault => empêcher envoi du formulaire
         const valeurInput = parseInt(input.value); 
         if(valeurInput < 0 || valeurInput > 100) return; // return => arrêt du formulaire
@@ -36,7 +35,7 @@ const play = () => {
             body.style.backgroundImage = bgWin;
             message.textContent = `BRAVO !!! Le nombre était bien ${randomNumber}`;
             rejouerBtn.style.display = "block";
-        }
+        }// on definit le comportement en fct de la valeur du nombre 
         if(valeurInput !== randomNumber){
             if(randomNumber < valeurInput + 3 && randomNumber > valeurInput -3){
                 body.style.backgroundImage = bgBrulant;
@@ -52,10 +51,11 @@ const play = () => {
                 message.textContent = "C'est Froid";
             }
             vies--;
-            verifyloose();
+            verifyLoose();// on lance la fonction verifyLoose
         } 
-    }) 
-    const verifyloose = () => {
+        actualiseCoeurs(vies);
+    })// on definit la fonction verifyLoose
+    const verifyLoose = () => {
         if(vies === 0){
             body.style.backgroundImage = bgLoose;
             body.style.color = '#990000';
@@ -63,5 +63,20 @@ const play = () => {
             message.textContent = `Vous avez perdu. Le nombre était ${randomNumber}`;
             rejouerBtn.style.display = "block";// réactiver bouton pour rejouer 
         }
+    }// on ajoute ou enleves un certain nombre de coeur au tableau
+    const actualiseCoeurs = (vies) => {
+        divVies.innerHTML = "";
+        let tableauDeVies = [];
+        for(let i = 0; i < vies; i++){
+            tableauDeVies.push(coeurPlein);
+        }
+        for(let i = 0; i < totalVies - vies; i++){
+            tableauDeVies.push(coeurVide);
+        }
+        tableauDeVies.forEach(coeur => {
+            divVies.innerHTML += coeur;
+        })
     }
+    actualiseCoeurs(vies);
 }   
+play();
