@@ -38,7 +38,30 @@ const play = () => {
             rejouerBtn.style.display = "block";
         }
         if(valeurInput !== randomNumber){
-            
+            if(randomNumber < valeurInput + 3 && randomNumber > valeurInput -3){
+                body.style.backgroundImage = bgBrulant;
+                message.textContent = "C'est brûlant !!!";
+            }else if(randomNumber < valeurInput + 6 && randomNumber > valeurInput -6){
+                body.style.backgroundImage = bgChaud;
+                message.textContent = "C'est chaud !!!";
+            }else if(randomNumber < valeurInput + 11 && randomNumber > valeurInput -11){
+                body.style.backgroundImage = bgTiede;
+                message.textContent = "C'est tiède";
+            }else{
+                body.style.backgroundImage = bgFroid;
+                message.textContent = "C'est Froid";
+            }
+            vies--;
+            verifyloose();
+        } 
+    }) 
+    const verifyloose = () => {
+        if(vies === 0){
+            body.style.backgroundImage = bgLoose;
+            body.style.color = '#990000';
+            essayerBtn.setAttribute("disabled", "") // set attribute => désactiver le bouton
+            message.textContent = `Vous avez perdu. Le nombre était ${randomNumber}`;
+            rejouerBtn.style.display = "block";// réactiver bouton pour rejouer 
         }
-    })    
-}
+    }
+}   
