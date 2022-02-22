@@ -22,15 +22,17 @@ const bgChaud = 'linear-gradient(120deg, #9795f0 0%, #fbc8d4 100%)';
 
 const bgWin = "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800";
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
-// decla variables vies
+// décla variables vies
 let totalVies;
 let vies;
 // phrase 
 let p = document.createElement("p");
 // PLAY :
 const play = () => {
+    // tableau qui stocke les saisies 
+    let nombresSaisies = [];
     // nombre aléatoire
-    // Math.random => generer un nombre aléatoire entre 0 et 1 (1 exclu)
+    // Math.random => générer un nombre aléatoire entre 0 et 1 (1 exclu)
     // Math.floor => renvoi le plus grand entier inférieur ou égal au nombre
     const randomNumber = Math.floor(Math.random() * 101);
     console.log(randomNumber);
@@ -45,8 +47,10 @@ const play = () => {
             body.style.backgroundImage = bgWin;
             message.textContent = `BRAVO !!! Le nombre était bien ${randomNumber}`;
             rejouerBtn.style.display = "block";
-        }// on definit le comportement en fct de la valeur du nombre 
-        if(valeurInput !== randomNumber){
+        // on definit le comportement en fct de la valeur du nombre 
+         // sinon si la valeur de l'input est différente du nombre aléatoire et que la valeur de l'input n'est pas dans le tableau    
+        }
+        else if(valeurInput !== randomNumber && nombresSaisies.includes(valeurInput) == false){
             if(randomNumber < valeurInput + 3 && randomNumber > valeurInput -3){
                 body.style.backgroundImage = bgBrulant;
                 message.textContent = "C'est brûlant !!!";
@@ -62,9 +66,16 @@ const play = () => {
             }
             vies--;
             verifyLoose();// on lance la fonction verifyLoose
-        } 
+        }
+         //sinon c'est le cas où il est ds le tableau auparavant
+        else{
+            alert("Ce nombre a déjà été saisie!");
+        }
+        //ajouter le nombre saisie au tableau
+        nombresSaisies.push(valeurInput);
         actualiseCoeurs(vies);
-    })// on definit la fonction verifyLoose
+    }) 
+    // on définit la fonction verifyLoose
     const verifyLoose = () => {
         if(vies === 0){
             body.style.backgroundImage = bgLoose;
@@ -73,7 +84,7 @@ const play = () => {
             message.textContent = `Vous avez perdu. Le nombre était ${randomNumber}`;
             rejouerBtn.style.display = "block";// réactiver bouton pour rejouer 
         }
-    }// on ajoute ou enleves un certain nombre de coeur au tableau
+    }// on ajoute ou enlèves un certain nombre de coeur au tableau
     const actualiseCoeurs = (vies) => {
         divVies.innerHTML = "";
         let tableauDeVies = [];
@@ -103,31 +114,25 @@ const play = () => {
             actualiseCoeurs(vies);
         })
         interNiv.addEventListener("click", function(){
-            console.log("hello");
             totalVies = 5;
             vies = 5;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
-            console.log("hello");
         })
         difficultNiv.addEventListener("click", function(){
-            console.log("hello");
             totalVies = 4;
             vies = 4;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
-            console.log("hello");
         })   
         nightmareNiv.addEventListener("click", function(){
-            console.log("hello");
             totalVies = 3;
             vies = 3;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
-            console.log("hello");
         })   
     }
 }   
