@@ -13,6 +13,7 @@ const coeurPlein = '<ion-icon name="heart"></ion-icon>';
 const bgFroid = 'linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)';
 const bgTiede = 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)';
 const bgBrulant = 'linear-gradient(120deg, #ff0844 0%, #ffb199 100%)';
+const bgChaud = 'linear-gradient(120deg, #9795f0 0%, #fbc8d4 100%)';
 
 const bgWin = "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800";
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
@@ -23,9 +24,10 @@ const play = () => {
     // Math.random => generer un nombre aléatoire entre 0 et 1 (1 exclu)
     // Math.floor => renvoi le plus grand entier inférieur ou égal au nombre
     const randomNumber = Math.floor(Math.random() * 101);
-    const totalVies = 8;
+    const totalVies = 5;
     let vies = totalVies;
     console.log(randomNumber);
+    rejouerBtn.style.display = "none";
 // actualisation à chaque essai- Toute la logique
     formulaire.addEventListener("submit", (e) => {
         e.preventDefault(); //preventDefault => empêcher envoi du formulaire
@@ -78,5 +80,10 @@ const play = () => {
         })
     }
     actualiseCoeurs(vies);
+    // forcer rechargement de la page
+    rejouerBtn.addEventListener("click", () => {
+        message.style.display = "none";
+        document.location.reload(true);
+    })
 }   
 play();
