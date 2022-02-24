@@ -11,7 +11,8 @@ const interNiv = document.getElementById("niv-inter");
 const difficultNiv = document.getElementById("niv-difficile");
 const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
-const divForm = document.getElementById("hidden-form");
+const divForm = document.getElementById("hidden-form-number");
+const divSurname = document.getElementById("hidden-form-surname");
 // modéles de coeurs
 const coeurVide = '<ion-icon name="heart-outline"></ion-icon>';
 const coeurPlein = '<ion-icon name="heart"></ion-icon>';
@@ -23,7 +24,7 @@ const bgChaud = 'linear-gradient(120deg, #9795f0 0%, #fbc8d4 100%)';
 
 const bgWin = "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800";
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
-// décla variables vies
+// déclaration variables vies
 let totalVies;
 let vies;
 // phrase 
@@ -108,6 +109,7 @@ const play = () => {
     // fonction selection difficultés
     function selectedLevels(){
         easyNiv.addEventListener("click", function(){
+            askSurname();
             totalVies = 6;
             vies = 6;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
@@ -116,6 +118,7 @@ const play = () => {
             divForm.style.display = "block";
         })
         interNiv.addEventListener("click", function(){
+            askSurname();
             totalVies = 5;
             vies = 5;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
@@ -124,6 +127,7 @@ const play = () => {
             divForm.style.display = "block";
         })
         difficultNiv.addEventListener("click", function(){
+            askSurname();
             totalVies = 4;
             vies = 4;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
@@ -132,6 +136,7 @@ const play = () => {
             divForm.style.display = "block";
         })   
         nightmareNiv.addEventListener("click", function(){
+            askSurname();
             totalVies = 3;
             vies = 3;
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
@@ -140,14 +145,12 @@ const play = () => {
             divForm.style.display = "block";
         })   
     }
+    // fonction demander pseudo à utilisateur
+    function askSurname(){
+        let result = confirm("Voulez-vous créer votre pseudo et enregistrer votre score?");
+        if (result == true) {
+           divSurname.style.display = "block";
+        }
+    }
 }   
 play();
-// // fonction fermer jeu
-// function leaveGame(){
-
-// onclick if(!confirm("Etes-vous sûr de vouloir quitter cette application?"){ 
-//     window.close(); 
-//     }else{
-//     return false;
-//     }
-// }

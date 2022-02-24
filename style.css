@@ -84,7 +84,7 @@ button:hover{
 p#message{
     margin: 20px auto 0 auto;
 }
-#hidden-form,#rejouerBtn{
+#hidden-form-surname,#hidden-form-number,#rejouerBtn{
     display: none;
     margin: 5px auto 0 auto;
 }
