@@ -11,6 +11,7 @@ const interNiv = document.getElementById("niv-inter");
 const difficultNiv = document.getElementById("niv-difficile");
 const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
+const divForm = document.getElementById("hidden-form");
 // modéles de coeurs
 const coeurVide = '<ion-icon name="heart-outline"></ion-icon>';
 const coeurPlein = '<ion-icon name="heart"></ion-icon>';
@@ -112,6 +113,7 @@ const play = () => {
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
+            divForm.style.display = "block";
         })
         interNiv.addEventListener("click", function(){
             totalVies = 5;
@@ -119,6 +121,7 @@ const play = () => {
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
+            divForm.style.display = "block";
         })
         difficultNiv.addEventListener("click", function(){
             totalVies = 4;
@@ -126,6 +129,7 @@ const play = () => {
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
+            divForm.style.display = "block";
         })   
         nightmareNiv.addEventListener("click", function(){
             totalVies = 3;
@@ -133,8 +137,17 @@ const play = () => {
             p.textContent = `Trouvez un nombre entre 0 et 100. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
+            divForm.style.display = "block";
         })   
     }
 }   
 play();
+// // fonction fermer jeu
+// function leaveGame(){
 
+// onclick if(!confirm("Etes-vous sûr de vouloir quitter cette application?"){ 
+//     window.close(); 
+//     }else{
+//     return false;
+//     }
+// }
