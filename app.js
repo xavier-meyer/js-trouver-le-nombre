@@ -13,6 +13,8 @@ const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
 const divForm = document.getElementById("hidden-form-number");
 const divSurname = document.getElementById("hidden-form-surname");
+const sentBtn = document.getElementById("sentBtn");
+const divScore = document.getElementById("scores");
 // modéles de coeurs
 const coeurVide = '<ion-icon name="heart-outline"></ion-icon>';
 const coeurPlein = '<ion-icon name="heart"></ion-icon>';
@@ -27,6 +29,12 @@ const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
 // déclaration variables vies
 let totalVies;
 let vies;
+// déclaration variable fonction affichage score
+let nbVictory = 0;
+let nbDefeat = 0;
+let nbGames = 0;
+// déclaration variable fonction affichage pseudo
+let pseudo;
 // phrase 
 let p = document.createElement("p");
 // PLAY :
@@ -40,7 +48,7 @@ const play = () => {
     console.log(randomNumber);
     selectedLevels();
     rejouerBtn.style.display = "none";
-// actualisation à chaque essai- Toute la logique
+    // actualisation à chaque essai- Toute la logique
     formulaire.addEventListener("submit", (e) => {
         e.preventDefault(); //preventDefault => empêcher envoi du formulaire
         const valeurInput = parseInt(input.value); 
@@ -48,10 +56,14 @@ const play = () => {
         if(valeurInput === randomNumber){
             body.style.backgroundImage = bgWin;
             message.textContent = `BRAVO !!! Le nombre était bien ${randomNumber}`;
+            nbVictory++;
+            nbGames++;
             rejouerBtn.style.display = "block";
+            showNumberVictory();
+            showNumberGames();
+        }   
         // on definit le comportement en fct de la valeur du nombre 
          // sinon si la valeur de l'input est différente du nombre aléatoire et que la valeur de l'input n'est pas dans le tableau    
-        }
         else if(valeurInput !== randomNumber && nombresSaisies.includes(valeurInput) == false){
             if(randomNumber < valeurInput + 3 && randomNumber > valeurInput -3){
                 body.style.backgroundImage = bgBrulant;
@@ -67,16 +79,19 @@ const play = () => {
                 message.textContent = "C'est Froid";
             }
             vies--;
+            nbDefeat++;
+            nbGames++;
+            showNumberDefeat();
+            showNumberGames();
             verifyLoose();// on lance la fonction verifyLoose
-        }
-         //sinon c'est le cas où il est ds le tableau auparavant
-        else{
+        //sinon c'est le cas où il est ds le tableau auparavant
+        }else{
             alert("Ce nombre a déjà été saisie!");
         }
         //ajouter le nombre saisie au tableau
         nombresSaisies.push(valeurInput);
         actualiseCoeurs(vies);
-    }) 
+    })     
     // on définit la fonction verifyLoose
     const verifyLoose = () => {
         if(vies === 0){
@@ -116,6 +131,10 @@ const play = () => {
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
             divForm.style.display = "block";
+            divScore.style.display = "block";
+            showNumberVictory();
+            showNumberDefeat();
+            showNumberGames();
         })
         interNiv.addEventListener("click", function(){
             askSurname();
@@ -125,6 +144,10 @@ const play = () => {
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
             divForm.style.display = "block";
+            divScore.style.display = "block";
+            showNumberVictory();
+            showNumberDefeat();
+            showNumberGames();
         })
         difficultNiv.addEventListener("click", function(){
             askSurname();
@@ -134,6 +157,10 @@ const play = () => {
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
             divForm.style.display = "block";
+            divScore.style.display = "block";
+            showNumberVictory();
+            showNumberDefeat();
+            showNumberGames();
         })   
         nightmareNiv.addEventListener("click", function(){
             askSurname();
@@ -143,6 +170,10 @@ const play = () => {
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
             divForm.style.display = "block";
+            divScore.style.display = "block";
+            showNumberVictory();
+            showNumberDefeat();
+            showNumberGames();
         })   
     }
     // fonction demander pseudo à utilisateur
@@ -152,5 +183,17 @@ const play = () => {
            divSurname.style.display = "block";
         }
     }
+    // fonction afficher le nb de victoires
+    function showNumberVictory(){
+    document.getElementById("numberVictory").innerHTML = nbVictory;
+    }    
+    // fonction afficher le nb de défaites
+    function showNumberDefeat(){
+    document.getElementById("numberDefeat").innerHTML = nbDefeat;
+    }  
+    // fonction afficher le nb de parties
+    function showNumberGames(){
+    document.getElementById("numberGame").innerHTML = nbGames;
+    } 
 }   
 play();

@@ -33,14 +33,26 @@
                     </div> 
                     <div id="hidden-form-surname">
                         <label for="text">Entrez un pseudo:</label>  
-                        <input type="text" id="text" min="0" max="100" name="surname" required>
-                        <button type="submit" id="showSurname">envoyer</button>  
+                        <input type="text" id="text" maxlength="19" size="12" required>
+                        <button type="submit" id="sentBtn">envoyer</button>  
                     </div>
                     <button id="rejouerBtn">rejouer</button>
                 </form>
                 <p id="details">* Brûlant = &plusmn; 2 ; Chaud = &plusmn; 5 ; Tiéde = &plusmn; 10 ; Froid = + 10.</p>
             </div>
-        </section>    
+        </section>   
+        <section>
+            <div id="scores">
+                <span>Votre pseudo:</span>
+                <span id="surname" class="mx-5"></span>
+                <span>nb victoires:</span>
+                <span id="numberVictory" class="mx-3"></span>
+                <span>nb défaites:</span>
+                <span id="numberDefeat" class="mx-3"></span>
+                <span>nb games:</span>
+                <span id="numberGame" class="mx-3"></span>
+            </div>    
+        </section> 
     </main>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
